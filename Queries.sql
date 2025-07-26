@@ -9,6 +9,7 @@ select count(*) from sales;
 
 -- Q.1 Coffee consumers count
 -- How many people in each city are estimated to consume cofee,given that 25% of the population does?
+
 select 
       city_name,
       round((population*0.25)/1000000,2) as coffee_consumers_in_millions,
@@ -26,6 +27,7 @@ Chennai	2.78	6
 
 -- Q.2 Total Revenue from coffee sales
 -- what is the total revenue generated from coffee sales across all cities in the last quarter of 2023?
+
 select *,
        extract(year from sale_date) as year,
        extract(quarter from sale_date) as qtr from sales where year(sale_date)=2023 and quarter(sale_date)=4;
@@ -69,8 +71,9 @@ Coffee Beans (500g)	1218
 Tote Bag with Coffee Design	776
 */
 
--- Average sales amount per city
+-- Q.4 Average sales amount per city
 -- What is the average sales amount per customer in each city
+
 select * from sales;
 select 
       ci.city_name,
@@ -96,7 +99,6 @@ Delhi	750420	68	11035.59
 -- Q.5 City populaion and coffee consumers
 -- Provide a list of cities along with their population and estimated coffee consumers.
 -- city_names,population_estimated_consumers,custoers
-use coffee_db;
 
 WITH city_table AS (
     SELECT 
@@ -141,6 +143,7 @@ order by 1,3 desc) as t1 where rn<=3;
 
 -- Q.7 Customer segmentation by city
 -- how many unique customers are there in each city who have purchased coffee products?
+
 select 
       ci.city_name,
       count(distinct s.customer_id) as unique_cst
@@ -154,6 +157,7 @@ order by 1 ;
 
 -- Q.8 Average sale vs rent
 -- Find each city and their average sale per customer and avg rent per customer
+
 with city_sales as(
 select
       ci.city_name,
@@ -187,6 +191,7 @@ order by 4 desc;
 -- Q.9 Monthly sales growth
 -- Sales growth rate:calculate the percentage growth (or decline) in sales over different time periods (monthly)
 -- by each city
+
 with monthly_sales as(
 select
       ci.city_name,
